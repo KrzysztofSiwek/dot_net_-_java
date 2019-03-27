@@ -22,6 +22,10 @@
         <TextBox x:Name="city" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="348,262,0,0" TextWrapping="Wrap" Text="city" VerticalAlignment="Top" Width="103"/>
         <Button x:Name="getTimeZone" Content="get time zone" Grid.Column="1" HorizontalAlignment="Left" Height="43" Margin="491,262,0,0" VerticalAlignment="Top" Width="96" Click="GetTimeZone_Click"/>
         <Label x:Name="loading" Content="" Grid.Column="1" HorizontalAlignment="Left" Height="27" Margin="363,51,0,0" VerticalAlignment="Top" Width="138"/>
+        <TextBox  x:Name="animTextBlock" TextWrapping="Wrap" Text="" />
+        <Button x:Name="animBtn" Content="start animation" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="504,315,0,0" VerticalAlignment="Top" Width="70" Click="AnimBtn_Click"/>
+
+
 
     </Grid>
 </Window>

@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Animation.cs" />
     <Compile Include="TimeZoneConnection.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="MainWindow.xaml.cs">

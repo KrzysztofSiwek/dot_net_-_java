@@ -27,7 +27,7 @@ namespace WpfApp1
             InitializeComponent();
         }
 
-        private async void Btn1_Click(object sender, RoutedEventArgs e)
+        private void Btn1_Click(object sender, RoutedEventArgs e)
         {
             img1.Source = new BitmapImage(new Uri(txtBx3.Text, UriKind.Relative));
             viewBox.Text += txtBx1.Text + " " + txtBx2.Text + "\n";
@@ -38,6 +38,40 @@ namespace WpfApp1
             string data = await TimeZoneConnection.LoadTimeZoneAsync(continent.Text, city.Text);
             string[] tmp = Regex.Split(data, @"\s");
             viewBox.Text += city.Text + ": " + tmp[1] +  "\n";
+        }
+
+        public void UpdateProgressBlock(string text)
+        {
+            try
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    animTextBlock.Text = text;
+                });
+            }
+            catch { }
+        }
+
+        private bool animating = false;
+        private System.Threading.Timer waitingAnimationTask;
+        private void AnimBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (animating)
+            {
+                animTextBlock.Text = "";
+                waitingAnimationTask.Dispose();
+                animating = false;
+            }
+            else
+            {
+                animating = true;
+                waitingAnimationTask =
+                new System.Threading.Timer(
+                new Animation(10, this).UpdateStatus,
+                null,
+                TimeSpan.FromMilliseconds(0),
+                TimeSpan.FromMilliseconds(500));
+            }
         }
     }
 }
