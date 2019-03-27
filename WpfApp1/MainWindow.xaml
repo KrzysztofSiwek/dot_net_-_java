@@ -18,6 +18,13 @@
         <TextBox x:Name="viewBox" Grid.Column="1" HorizontalAlignment="Left" Height="284" Margin="38,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="264"/>
         <Image x:Name="img1" Grid.Column="1" HorizontalAlignment="Left" Height="101" Margin="348,10,0,0" VerticalAlignment="Top" Width="103"/>
         <TextBox x:Name="txtBx3" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="348,201,0,0" TextWrapping="Wrap" Text="img src" VerticalAlignment="Top" Width="103"/>
+        <TextBox x:Name="continent" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="348,293,0,0" TextWrapping="Wrap" Text="continent" VerticalAlignment="Top" Width="103"/>
+        <TextBox x:Name="city" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="348,262,0,0" TextWrapping="Wrap" Text="city" VerticalAlignment="Top" Width="103"/>
+        <Button x:Name="getTimeZone" Content="get time zone" Grid.Column="1" HorizontalAlignment="Left" Height="43" Margin="491,262,0,0" VerticalAlignment="Top" Width="96" Click="GetTimeZone_Click"/>
+        <TextBox x:Name="text_html" Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="330.8,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="467.8,47,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="467.8,47,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="562.8,47,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
 
     </Grid>
 </Window>
