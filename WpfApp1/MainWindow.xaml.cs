@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,9 +36,12 @@ namespace WpfApp1
 
         private async void GetTimeZone_Click(object sender, RoutedEventArgs e)
         {
-            string data = await TimeZoneConnection.LoadTimeZoneAsync(continent.Text, city.Text);
-            string[] tmp = Regex.Split(data, @"\s");
-            viewBox.Text += city.Text + ": " + tmp[1] +  "\n";
+            string json = await WeatherConnection.LoadTimeZoneAsync(Int32.Parse(lat.Text), Int32.Parse(lon.Text));
+            JObject data = JObject.Parse(json);
+            var cities = from p in data["list"] select (string)p["name"];
+            var weathers = from p in data["list"] select (string)p["weather"][0]["description"];
+            for (int i = 0; i < cities.Count(); ++i)
+                viewBox.Text += cities.ElementAt(i) + ":" + weathers.ElementAt(i) + "\n";
         }
 
         public void UpdateProgressBlock(string text)
@@ -73,5 +77,6 @@ namespace WpfApp1
                 TimeSpan.FromMilliseconds(500));
             }
         }
+
     }
 }
