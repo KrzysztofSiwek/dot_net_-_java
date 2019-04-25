@@ -5,29 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" >
+    <Window.Resources>
+        <CollectionViewSource x:Key="weather_tableViewSource" d:DesignSource="{d:DesignInstance {x:Type local:weather_table}, CreateList=True}"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource weather_tableViewSource}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="115*"/>
             <ColumnDefinition Width="124*"/>
-            <ColumnDefinition Width="553*"/>
+            <ColumnDefinition Width="458*"/>
+            <ColumnDefinition Width="95*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel HorizontalAlignment="Left" Height="216" Margin="62,162,0,0" VerticalAlignment="Top" Width="214" Grid.ColumnSpan="3"/>
-        <TextBox x:Name="txtBx1" HorizontalAlignment="Left" Height="35" Margin="224,129,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="103" Grid.Column="2"/>
-        <TextBox x:Name="txtBx2" Grid.Column="2" HorizontalAlignment="Left" Height="35" Margin="367,129,0,0" TextWrapping="Wrap" Text="surname" VerticalAlignment="Top" Width="96"/>
-        <Button x:Name="btn1" Content="submit" Grid.Column="2" HorizontalAlignment="Left" Height="36" Margin="380,194,0,0" VerticalAlignment="Top" Width="70" Click="Btn1_Click"/>
-        <TextBox x:Name="viewBox" Grid.Column="1" HorizontalAlignment="Left" Height="284" Margin="38,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="264" Grid.ColumnSpan="2"/>
-        <Image x:Name="img1" Grid.Column="2" HorizontalAlignment="Left" Height="101" Margin="224,10,0,0" VerticalAlignment="Top" Width="103"/>
-        <TextBox x:Name="txtBx3" Grid.Column="2" HorizontalAlignment="Left" Height="36" Margin="224,201,0,0" TextWrapping="Wrap" Text="img src" VerticalAlignment="Top" Width="103"/>
-        <TextBox x:Name="lat" Grid.Column="2" HorizontalAlignment="Left" Height="22" Margin="224,293,0,0" TextWrapping="Wrap" Text="lat" VerticalAlignment="Top" Width="103"/>
-        <TextBox x:Name="lon" Grid.Column="2" HorizontalAlignment="Left" Height="26" Margin="224,262,0,0" TextWrapping="Wrap" Text="lon" VerticalAlignment="Top" Width="103"/>
-        <Button x:Name="getTimeZone" Content="get weather" Grid.Column="2" HorizontalAlignment="Left" Height="43" Margin="367,262,0,0" VerticalAlignment="Top" Width="96" Click="GetTimeZone_Click"/>
-        <Label x:Name="loading" Content="" Grid.Column="2" HorizontalAlignment="Left" Height="27" Margin="239,51,0,0" VerticalAlignment="Top" Width="138"/>
-        <TextBox  x:Name="animTextBlock" TextWrapping="Wrap" Text="" Grid.Column="2" Margin="345,354,81,21" />
-        <Button x:Name="animBtn" Content="start animation" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="345,325,0,0" VerticalAlignment="Top" Width="127" Click="AnimBtn_Click"/>
-
-
-
+        <TextBox x:Name="txtBx1" HorizontalAlignment="Left" Height="20" Margin="87,48,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="103" Grid.Column="1" RenderTransformOrigin="0.408,-0.486" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtBx2" Grid.Column="2" HorizontalAlignment="Left" Height="20" Margin="95,48,0,0" TextWrapping="Wrap" Text="surname" VerticalAlignment="Top" Width="96"/>
+        <Button x:Name="btn1" Content="submit" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="95,84,0,0" VerticalAlignment="Top" Width="96" Click="Btn1_Click"/>
+        <TextBox x:Name="viewBox" HorizontalAlignment="Left" Height="284" Margin="21,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.ColumnSpan="2"/>
+        <Image x:Name="img1" Grid.Column="2" HorizontalAlignment="Left" Height="101" Margin="219,21,0,0" VerticalAlignment="Top" Width="103"/>
+        <TextBox x:Name="txtBx3" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="87,85,0,0" TextWrapping="Wrap" Text="img src" VerticalAlignment="Top" Width="103" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="lat" Grid.Column="2" HorizontalAlignment="Left" Height="22" Margin="88,128,0,0" TextWrapping="Wrap" Text="lat" VerticalAlignment="Top" Width="103"/>
+        <TextBox x:Name="lon" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="87,128,0,0" TextWrapping="Wrap" Text="lon" VerticalAlignment="Top" Width="103" Grid.ColumnSpan="2"/>
+        <Button x:Name="getTimeZone" Content="get weather" Grid.Column="2" HorizontalAlignment="Left" Height="22" Margin="219,128,0,0" VerticalAlignment="Top" Width="85" Click="GetTimeZone_Click"/>
+        <Label x:Name="loading" Content="" Grid.Column="1" HorizontalAlignment="Left" Height="27" Margin="119,68,0,0" VerticalAlignment="Top" Width="138" Grid.ColumnSpan="2"/>
+        <TextBox  x:Name="animTextBlock" TextWrapping="Wrap" Text="" Margin="0,365,219,0" Grid.ColumnSpan="3" Height="45" VerticalAlignment="Top" HorizontalAlignment="Right" Width="457" />
+        <Button x:Name="animBtn" Content="start animation" HorizontalAlignment="Left" Height="24" Margin="10,324,0,0" VerticalAlignment="Top" Width="127" Click="AnimBtn_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="DBBtn" Content="add to db" Grid.Column="2" HorizontalAlignment="Left" Margin="58,324,0,0" VerticalAlignment="Top" Width="75" Click="DBBtn_Click"/>
+        <DataGrid x:Name="weather_tableDataGrid" AutoGenerateColumns="False" Grid.ColumnSpan="2" Grid.Column="2" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="322,21,24,26" RowDetailsVisibilityMode="VisibleWhenSelected" >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="cityColumn" Binding="{Binding city}" Header="city" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="tempColumn" Binding="{Binding temp}" Header="temp" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="weather_descrColumn" Binding="{Binding weather_descr}" Header="weather descr" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid x:Name="grid1" Grid.Column="2" HorizontalAlignment="Left" Margin="58,209,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="city:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="cityTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding city, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="temp:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="tempTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding temp, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="weather descr:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="weather_descrTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding weather_descr, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Button x:Name="populateBtn" Content="populate db" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="175,324,0,0" VerticalAlignment="Top" Width="101" Click="PopulateBtn_Click"/>
     </Grid>
 </Window>
 
