@@ -1,43 +1,56 @@
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import java.util.Random;
+import javax.swing.Timer;
+
 
 public class GhostButton {
+    private final static int ONE_SECOND = 20;
+
 
     public static void main(String[] args) {
+
         EventQueue.invokeLater(new Runnable() {
-
             public void run() {
-
                 Random r = new Random();
+                Timer timer = new Timer(ONE_SECOND, null);
+                Move move = new Move();
+
+                MyFrame frame = new MyFrame(move.old_x, move.old_y);
                 JButton ghostButton = new JButton("Wkurzający przycisk ");
 
-                MyFrame frame = new MyFrame();
                 frame.add(ghostButton);
+
+
+                timer.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+
+                        move.motion(frame);
+                        move.stop(timer);
+                    }
+
+                });
 
                 ghostButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        move.set_position();
+                        timer.start();
 
-                        frame.setLocation(r.ints(0, 1500).limit(1).findFirst().getAsInt(),r.ints(0, 500).limit(1).findFirst().getAsInt());
-                        ghostButton.setBackground(
-                                new Color(
-                                r.ints(0,255).limit(1).findFirst().getAsInt(),
-                                r.ints(0,255).limit(1).findFirst().getAsInt(),
-                                r.ints(0,255).limit(1).findFirst().getAsInt()
-                                )
 
-                        );
+
+
                     }
                 });
 
             }
         });
+
+
+
     }
-
-
-
 }
+
