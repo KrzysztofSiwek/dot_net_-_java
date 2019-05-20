@@ -46,7 +46,7 @@ class MainWindow extends JFrame{
         JPanel panel = new JPanel();
         JButton button = new JButton("Start");
 
-        setContentPane(new JLabel(new ImageIcon("C:\\Users\\48888\\Desktop\\JAVA\\snake\\src\\image\\main.png")));
+        setContentPane(new JLabel(new ImageIcon("src\\image\\main.png")));
         setLayout(null);
 
         button.setBounds(550,400,400,100);
