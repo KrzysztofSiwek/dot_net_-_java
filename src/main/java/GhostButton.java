@@ -31,6 +31,7 @@ public class GhostButton {
 
                         move.motion(frame);
                         move.stop(timer);
+
                     }
 
                 });
