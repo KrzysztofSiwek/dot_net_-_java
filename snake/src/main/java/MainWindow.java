@@ -1,18 +1,16 @@
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.EventQueue;
 
 
 class MainWindow extends JFrame{
 
     boolean newGame = false;
+    private int BOARDSIZEX = 1200;
+    private int BOARDSIZEY = 700;
 
     public void newGame(){
 
@@ -20,25 +18,25 @@ class MainWindow extends JFrame{
     ActionListener act = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             getContentPane().removeAll();
-            getContentPane().repaint();
+
             runGame();
+            repaint();
 
 
 
         }
     };
 
-    public void runGame(){
-        setLayout(null);
-        JPanel panel = new JPanel();
-        JButton b = new JButton("cdo");
-        panel.setSize(1200,750);
-        panel.add(b);
-        add(panel);
-        setVisible(true);
 
+
+    public void runGame(){
+        Game game = new Game();
+        game.initializeGame();
+        add(game);
+        game.requestFocus();
+        setVisible(true);
     }
-    
+
 
 
     public void setMain(){
@@ -55,15 +53,15 @@ class MainWindow extends JFrame{
 
         panel.setLocation(0,0);
 
-        setVisible(true);
         button.addActionListener(act);
+        setVisible(true);
     }
 
 
     public MainWindow() {
 
         setTitle("Main");
-        setSize(1200, 750);
+        setSize(BOARDSIZEX, BOARDSIZEY);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
