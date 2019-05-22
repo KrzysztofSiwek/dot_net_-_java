@@ -10,19 +10,30 @@ class MainWindow extends JFrame{
 
     boolean newGame = false;
     private int BOARDSIZEX = 1200;
-    private int BOARDSIZEY = 700;
+    private int BOARDSIZEY = 694;
+
+
+    public MainWindow() {
+
+        setTitle("Main");
+        setSize(BOARDSIZEX, BOARDSIZEY);
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+
+    }
 
     public void newGame(){
 
     }
+
+
     ActionListener act = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             getContentPane().removeAll();
 
             runGame();
             repaint();
-
-
 
         }
     };
@@ -58,15 +69,7 @@ class MainWindow extends JFrame{
     }
 
 
-    public MainWindow() {
 
-        setTitle("Main");
-        setSize(BOARDSIZEX, BOARDSIZEY);
-
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
-    }
 
 
 }

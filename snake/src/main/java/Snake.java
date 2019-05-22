@@ -3,39 +3,69 @@ import java.util.ArrayList;
 
 public class Snake {
 
-
-    private ArrayList<Point> snakePos = new ArrayList<Point>();
-    private int speed = 5;
-
+    private int BOARDSIZEX = 1000;
+    private int BOARDSIZEY = 660;
+    private  int[] x = new int[(BOARDSIZEY*BOARDSIZEY)/20];
+    private  int[] y = new int[(BOARDSIZEY*BOARDSIZEY)/20];
+    private int speed = 10;
+    private int segment = 1;
     private boolean moveLeft = false;
     private boolean moveRight = false;
     private boolean moveDown = false;
     private boolean moveUp = false;
-    private int segment = 0;
 
     Snake(){
-        snakePos.add(new Point(100,100));
+        x[0] = BOARDSIZEX/2 ;
+        y[0] = BOARDSIZEY/2;
+    }
+
+    public void setSegment(){
+        segment +=1;
+    }
+
+    public int getSegment(){
+        return segment;
     }
 
     public void move(int direction){
         moveParameters(direction);
+        System.out.println(x[0]);
+        for (int i = segment; i > 0; i--) {
 
-//        System.out.println(snakePos);
-        for(int i = segment;i >0 ;i--){
-            snakePos.add(snakePos.get(i-1)) ;
+            x[i] = x[(i - 1)];
+            y[i] = y[(i - 1)];
         }
+
         if(moveLeft){
-            snakePos.get(0).x -= speed;
+
+            x[0] -= speed;
+
         }
         if(moveRight){
-            snakePos.get(0).x += speed;
+            x[0] += speed;
         }
         if(moveDown){
-            snakePos.get(0).y += speed;
+            y[0]+= speed;
         }
         if(moveUp){
-            snakePos.get(0).y -= speed;
+            y[0] -= speed;
         }
+
+    }
+    public int[] getTabX(){
+        int[] tmp = new int[segment];
+        for(int i =0; i<segment;i++){
+            tmp[i] = x[i];
+        }
+        return tmp;
+    }
+
+    public int[] getTabY(){
+        int[] tmp = new int[segment];
+        for(int i =0; i<segment;i++){
+            tmp[i] = y[i];
+        }
+        return tmp;
     }
 
     public void moveParameters(int direction){
@@ -64,12 +94,6 @@ public class Snake {
 
     }
 
-    public int getSegment(){
-        return segment;
-    }
-    public void setSegment(int s){
-         segment = s +1;
-    }
     public void stop(boolean stop){
         if(!stop){
             moveLeft = false;
@@ -82,15 +106,15 @@ public class Snake {
 
 
     public int snakeLenght(){
-        return snakePos.size();
+        return segment;
     }
 
-    public int getSnakeX(int x) {
-        return snakePos.get(x).x;
+    public int getSnakeX(int index) {
+        return x[index];
     }
 
-    public int getSnakeY(int y) {
-        return snakePos.get(y).y;
+    public int getSnakeY(int index) {
+        return y[index];
     }
 }
 
